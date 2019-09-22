@@ -1,0 +1,22 @@
+{
+    "name": "raulsalamanca/adems",
+    "description": "ADEMS Web Service Client",
+    "type": "library",
+    "require": {
+        "backpack/settings": "v4.x-dev as 4.0.0",
+        "fabpot/goutte": "^3.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raul Salamanca",
+            "email": "ralsalamanca@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+      "psr-0": {
+          "raulsalamanca/adems": "src/"
+      }
+    }
+}
