@@ -6,13 +6,15 @@ use Goutte\Client as Crawler;
 use Raulsalamanca\Adems\App\Services\SessionBusinessService;
 
 class Auth{
-  private $crawler, $sesscert;
+  public  $sesscert;
+  private $crawler;
+  private $username, $password, $schoolId, $periodId;
 
-  public function __construct(){
-    $this->username = config('adems.username');
-    $this->password = config('adems.password');
-    $this->schoolId = config('adems.default_school_id');
-    $this->periodId = config('adems.default_period_id');
+  public function __construct($username, $password, $schoolId, $periodId){
+    $this->username = $username;
+    $this->password = $password;
+    $this->schoolId = $schoolId;
+    $this->periodId = $periodId;
   }
 
   public function login(){
@@ -25,14 +27,14 @@ class Auth{
 
       @parse_str($crawler->filter('[name="initParams"]')->attr('value'));
 
-      if($this->setSesscert($sesscert))
+      if($this->sesscert = $sesscert)
         return $this->setDefaultSchool();
     }
     return false;
   }
 
   public function isConnected(){
-    if($this->getSesscert()){
+    if($this->sesscert){
       try{
         return $this->setDefaultSchool();
       }catch(\SoapFault $e){}
@@ -53,15 +55,7 @@ class Auth{
   }
 
   public function setDefaultSchool(){
-    return $this->setSchool(config('adems.default_school_id'), config('adems.default_period_id'));
-  }
-
-  private function setSesscert($sesscert){
-    return \Session::put('adems.sesscert', $sesscert) == null;
-  }
-
-  public function getSesscert(){
-    return (string) \Session::get('adems.sesscert');
+    return $this->setSchool(\Config::get('adems.default_school_id'), \Config::get('adems.default_period_id'));
   }
 
 }
