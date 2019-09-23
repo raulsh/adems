@@ -1,6 +1,6 @@
 <?php
 
-namespace raulsalamanca\adems\Services;
+namespace Raulsalamanca\Adems\App\Services;
 
 class SchoolService extends WebService{
   public function GetAuthorized($filter = ''){

@@ -1,12 +1,11 @@
 <?php
 
-namespace raulsalamanca\adems;
+namespace Raulsalamanca\Adems;
 
 use Illuminate\Support\ServiceProvider;
 
 use raulsalamanca\adems\Auth;
-use raulsalamanca\adems\Config;
-use raulsalamanca\adems\Console\Commands\AdemsSync;
+use raulsalamanca\adems\app\Console\Commands\AdemsSync;
 
 use Setting, App;
 
@@ -19,22 +18,13 @@ class AdemsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-      App::singleton(Config::class, function(){
-        $username = Setting::get('adems.username');
-        $password = Setting::get('adems.password');
-        $schoolId = Setting::get('adems.default_school_id');
-        $periodId = Setting::get('adems.default_period_id');
-
-        return new Config($username, $password, $schoolId, $periodId);
+      $this->app->singleton(Auth::class, function(){
+        return new Auth();
       });
 
-      App::singleton(Auth::class, function(){
-        return new Auth(app(Config::class));
-      });
-
-      $this->commands([
-        AdemsSyncCommand::class
-      ]);
+      $this->mergeConfigFrom(
+        __DIR__ . '/config/adems.php', 'adems'
+      );
     }
 
     /**

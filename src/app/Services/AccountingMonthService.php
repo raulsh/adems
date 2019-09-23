@@ -1,6 +1,6 @@
 <?php
 
-namespace raulsalamanca\adems\services;
+namespace Raulsalamanca\Adems\App\Services;
 
 class AccountingMonthService extends WebService{
   public function SearchMonthToAccount(){

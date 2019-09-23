@@ -1,6 +1,6 @@
 <?php
 
-namespace raulsalamanca\adems\Services;
+namespace Raulsalamanca\Adems\App\Services;
 
 class NaturalPersonRelativeService extends WebService{
   public function SearchByNaturalPersonId($naturalPersonId){

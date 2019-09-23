@@ -1,25 +1,26 @@
 <?php
-namespace raulsalamanca\adems;
+
+namespace Raulsalamanca\Adems;
 
 use Goutte\Client as Crawler;
-use App\Libraries\Adems\Services\SessionBusinessService;
+use Raulsalamanca\Adems\app\Services\SessionBusinessService;
 
 class Auth{
   private $crawler, $sesscert;
 
-  function __construct(Config $config){
-    $this->config  = $config;
+  public function __construct(){
+    $this->username = config('adems.username');
+    $this->password = config('adems.password');
+    $this->schoolId = config('adems.default_school_id');
+    $this->periodId = config('adems.default_period_id');
   }
 
   public function login(){
-    $username = $this->config->getUsername();
-    $password = $this->config->getPassword();
-
-    if($username and $password){
+    if($this->username and $this->password){
       $crawler = $this->crawler()->request('GET', 'http://www.adems.cl');
       $crawler = $this->crawler()->submit($crawler->selectButton('ctl00$ContentPlaceHolder2$Login1$lgnSignInPassword$btnLoginSingInPassword')->form(), [
-        'ctl00$ContentPlaceHolder2$Login1$lgnSignInPassword$UserName' => $username,
-        'ctl00$ContentPlaceHolder2$Login1$lgnSignInPassword$Password' => $password
+        'ctl00$ContentPlaceHolder2$Login1$lgnSignInPassword$UserName' => $this->username,
+        'ctl00$ContentPlaceHolder2$Login1$lgnSignInPassword$Password' => $this->password
       ]);
 
       @parse_str($crawler->filter('[name="initParams"]')->attr('value'));
@@ -46,12 +47,13 @@ class Auth{
   }
 
   public function setSchool($schoolId, $periodId = false){
-    $sessionBusiness = app(SessionBusinessService::class);
-    return $sessionBusiness->Start($schoolId, $periodId ? $periodId : $this->config->getPeriodId());
+    $this->schoolId = $schoolId;
+    $this->periodId = $periodId ? $periodId : $this->periodId;
+    return app(SessionBusinessService::class)->Start($this->schoolId, $this->periodId);
   }
 
   public function setDefaultSchool(){
-    return $this->setSchool($this->config->getSchoolId(), $this->config->getPeriodId());
+    return $this->setSchool(config('adems.default_school_id'), config('adems.default_period_id'));
   }
 
   private function setSesscert($sesscert){

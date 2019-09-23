@@ -1,8 +1,9 @@
 <?php
-namespace raulsalamanca\adems\Services;
+
+namespace Raulsalamanca\Adems\App\Services;
 
 use SoapClient, SoapHeader, SoapVar, SoapFault;
-use App\Libraries\Adems\Auth;
+use Raulsalamanca\Adems\Auth;
 
 class WebService extends SoapClient{
   private static $wsUrl    = 'http://www.adems.cl/Services/';
