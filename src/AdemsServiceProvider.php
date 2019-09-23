@@ -34,6 +34,8 @@ class AdemsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+      $this->publishes([
+        __DIR__ . '/config/adems.php' => config_path('adems.php')
+      ], 'config');
     }
 }
