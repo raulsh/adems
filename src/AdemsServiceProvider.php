@@ -18,7 +18,12 @@ class AdemsServiceProvider extends ServiceProvider
     public function register()
     {
       $this->app->singleton(Auth::class, function(){
-        return new Auth();
+        return new Auth(
+          \Config::get('adems.username'),
+          \Config::get('adems.password'),
+          \Config::get('adems.default_school_id'),
+          \Config::get('adems.default_period_id'),
+        );
       });
 
       $this->mergeConfigFrom(
