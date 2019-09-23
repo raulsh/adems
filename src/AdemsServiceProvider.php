@@ -4,8 +4,7 @@ namespace Raulsalamanca\Adems;
 
 use Illuminate\Support\ServiceProvider;
 
-use raulsalamanca\adems\Auth;
-use raulsalamanca\adems\app\Console\Commands\AdemsSync;
+use Raulsalamanca\Adems\Auth;
 
 use Setting, App;
 
