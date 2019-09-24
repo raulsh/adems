@@ -16,8 +16,8 @@
     ],
     "minimum-stability": "dev",
     "autoload": {
-      "psr-0": {
-          "Raulsalamanca\\Adems\\": "src"
+      "psr-4": {
+        "Raulsalamanca\\Adems\\": "src/"
       }
     },
     "extra": {
