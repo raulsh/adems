@@ -1,6 +1,6 @@
 <?php
 
-namespace Raulsalamanca\Adems\app\Services;
+namespace Raulsalamanca\Adems\Services;
 
 class SessionBusinessService extends WebService{
   public function Start($selectedSchoolId, $selectedPeriodId){

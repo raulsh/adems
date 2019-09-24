@@ -1,12 +1,12 @@
 <?php
 
-namespace Raulsalamanca\Adems\app\Services;
+namespace Raulsalamanca\Adems\Services;
 
 use SoapClient, SoapHeader, SoapVar, SoapFault;
 use Raulsalamanca\Adems\Auth;
 
 class WebService extends SoapClient{
-  private static $wsUrl    = 'http://www.adems.cl/Services/';
+  private static $wsUrl = 'http://www.adems.cl/Services/';
 
   function __construct(Auth $auth){
     parent::__construct(self::$wsUrl . (new \ReflectionClass($this))->getShortName() . '.svc?singleWsdl', ['trace' => 1]);
@@ -26,4 +26,3 @@ class WebService extends SoapClient{
     }
   }
 }
-?>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Raulsalamanca\Adems\app\Services;
+namespace Raulsalamanca\Adems\Services;
 
 class PersonService extends WebService{
   public function SearchByStudentOrResponsible($filter = '', $birthDate = null, $document = '', $mySchool = true, $isStudent = true, $isResponsible = true, $onlyActive = true){

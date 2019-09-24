@@ -1,6 +1,6 @@
 <?php
 
-namespace Raulsalamanca\Adems\app\Services;
+namespace Raulsalamanca\Adems\Services;
 
 class PaymentTypeService extends WebService{
   public function GetAll(){

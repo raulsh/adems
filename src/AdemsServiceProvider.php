@@ -3,10 +3,7 @@
 namespace Raulsalamanca\Adems;
 
 use Illuminate\Support\ServiceProvider;
-
 use Raulsalamanca\Adems\Auth;
-
-use Setting, App;
 
 class AdemsServiceProvider extends ServiceProvider
 {
@@ -27,7 +24,7 @@ class AdemsServiceProvider extends ServiceProvider
       });
 
       $this->mergeConfigFrom(
-        __DIR__ . '/config/adems.php', 'adems'
+        __DIR__ . '/adems.php', 'adems'
       );
     }
 
@@ -39,7 +36,7 @@ class AdemsServiceProvider extends ServiceProvider
     public function boot()
     {
       $this->publishes([
-        __DIR__ . '/config/adems.php' => config_path('adems.php')
+        __DIR__ . '/adems.php' => config_path('adems.php')
       ], 'config');
     }
 }

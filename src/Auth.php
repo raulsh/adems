@@ -3,7 +3,7 @@
 namespace Raulsalamanca\Adems;
 
 use Goutte\Client as Crawler;
-use Raulsalamanca\Adems\App\Services\SessionBusinessService;
+use Raulsalamanca\Adems\Services\SessionBusinessService;
 
 class Auth{
   public  $sesscert;
@@ -59,5 +59,3 @@ class Auth{
   }
 
 }
-
- ?>
