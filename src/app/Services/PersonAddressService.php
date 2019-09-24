@@ -1,6 +1,6 @@
 <?php
 
-namespace Raulsalamanca\Adems\App\Services;
+namespace Raulsalamanca\Adems\app\Services;
 
 class PersonAddressService extends WebService{
   public function SearchByPersonId($personId){
