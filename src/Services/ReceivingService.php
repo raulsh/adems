@@ -22,19 +22,19 @@ class ReceivingService extends WebService
         $this->debug = $response;
         if ($receiving = @$response->GetReceivingLiteResult) {
             if (@$receiving->Items->ReceivingItemLite->ReceivingItem) {
-                return [$receiving->Items->ReceivingItemLite];
+                $items = [$receiving->Items->ReceivingItemLite];
             } elseif (is_array($receiving->Items->ReceivingItemLite)) {
-                return $receiving->Items->ReceivingItemLite;
+                $items = $receiving->Items->ReceivingItemLite;
             } elseif (is_array($receiving->Items)) {
                 $items = [];
                 foreach ($receiving->Items as $item) {
                     $items[] = $item->ReceivingItemLite;
                 }
-
-                return $items;
             } else {
-                return $receiving;
+                $items = $receiving;
             }
+
+            return $items;
         }
 
         return null;

@@ -25,13 +25,13 @@ class Auth
     public function login()
     {
         if ($this->username and $this->password) {
-            $crawler = $this->crawler()->request('GET', 'http://www.adems.cl');
-            $crawler = $this->crawler()->submit($crawler->selectButton('ctl00$ContentPlaceHolder2$Login1$lgnSignInPassword$btnLoginSingInPassword')->form(), [
+            $login = $this->crawler()->request('GET', 'http://www.adems.cl');
+            $login = $this->crawler()->submit($login->selectButton('ctl00$ContentPlaceHolder2$Login1$lgnSignInPassword$btnLoginSingInPassword')->form(), [
                 'ctl00$ContentPlaceHolder2$Login1$lgnSignInPassword$UserName' => $this->username,
                 'ctl00$ContentPlaceHolder2$Login1$lgnSignInPassword$Password' => $this->password,
             ]);
 
-            @parse_str($crawler->filter('[name="initParams"]')->attr('value'));
+            @parse_str($login->filter('[name="initParams"]')->attr('value'));
 
             if ($this->sesscert = $sesscert) {
                 return $this->setDefaultSchool();
@@ -47,6 +47,7 @@ class Auth
             try {
                 return $this->setDefaultSchool();
             } catch (\SoapFault $e) {
+                return false;
             }
         }
 
