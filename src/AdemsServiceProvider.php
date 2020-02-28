@@ -3,7 +3,6 @@
 namespace Raulsalamanca\Adems;
 
 use Illuminate\Support\ServiceProvider;
-use Raulsalamanca\Adems\Auth;
 
 class AdemsServiceProvider extends ServiceProvider
 {
@@ -14,17 +13,17 @@ class AdemsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-      $this->app->singleton(Auth::class, function(){
-        return new Auth(
+        $this->app->singleton(Auth::class, function () {
+            return new Auth(
           \Config::get('adems.username'),
           \Config::get('adems.password'),
           \Config::get('adems.default_school_id'),
           \Config::get('adems.default_period_id'),
         );
-      });
+        });
 
-      $this->mergeConfigFrom(
-        __DIR__ . '/adems.php', 'adems'
+        $this->mergeConfigFrom(
+        __DIR__.'/adems.php', 'adems'
       );
     }
 
@@ -35,8 +34,8 @@ class AdemsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      $this->publishes([
-        __DIR__ . '/adems.php' => config_path('adems.php')
-      ], 'config');
+        $this->publishes([
+            __DIR__.'/adems.php' => config_path('adems.php'),
+        ], 'config');
     }
 }
