@@ -24,7 +24,7 @@ class Auth
 
     public function login()
     {
-        if ($this->username and $this->password) {
+        if ($this->username && $this->password) {
             $login = $this->crawler()->request('GET', 'http://www.adems.cl');
             $login = $this->crawler()->submit($login->selectButton('ctl00$ContentPlaceHolder2$Login1$lgnSignInPassword$btnLoginSingInPassword')->form(), [
                 'ctl00$ContentPlaceHolder2$Login1$lgnSignInPassword$UserName' => $this->username,
